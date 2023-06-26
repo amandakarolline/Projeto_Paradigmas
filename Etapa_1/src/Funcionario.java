@@ -1,10 +1,10 @@
 abstract class Funcionario {
 
     //atributos
-    private String nome;
+    String nome;
     private int identificacao;
     private double salario;
-    private String departamento;
+    String departamento;
      
     //construtor
     public Funcionario(String nome, int identificacao, double salario, String departamento) {

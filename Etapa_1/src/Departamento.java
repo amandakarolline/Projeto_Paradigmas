@@ -18,14 +18,14 @@ abstract class Departamento {
         departamentos.add(new Object[]{"RH", 3, new ArrayList<>()});
         departamentos.add(new Object[]{"Marketing", 4, new ArrayList<>()});
         departamentos.add(new Object[]{"Servicos Gerais", 5, new ArrayList<>()});
-
-        //lista de pessoas por departamentos
-        List<Object> departamentoAdministrativo = (List<Object>) departamentos.get(0)[2];
-        List<Object> departamentoFinanceiro = (List<Object>) departamentos.get(1)[2];
-        List<Object> departamentoRH = (List<Object>) departamentos.get(2)[2];
-        List<Object> departamentoMarketing = (List<Object>) departamentos.get(3)[2];
-        List<Object> departamentoServicosGerais = (List<Object>) departamentos.get(4)[2];
     }
+
+    //lista de pessoas por departamentos
+    List<Object> departamentoAdministrativo = (List<Object>) departamentos.get(0)[2];
+    List<Object> departamentoFinanceiro = (List<Object>) departamentos.get(1)[2];
+    List<Object> departamentoRH = (List<Object>) departamentos.get(2)[2];
+    List<Object> departamentoMarketing = (List<Object>) departamentos.get(3)[2];
+    List<Object> departamentoServicosGerais = (List<Object>) departamentos.get(4)[2];
 
     //atributos
     private String funcionario;
@@ -51,5 +51,11 @@ abstract class Departamento {
         System.out.println("Nome: " + selecionado[0]);
         System.out.println("Identificação: " + selecionado[1]);
         System.out.println("Funcionarios no departamento: "+ selecionado[2]);
+    }
+
+    public void adicionarFuncionarioDepartamento(Funcionario funcionario){
+        if (funcionario.departamento == "Administrativo"){
+            (departamentoAdministrativo).add(funcionario.nome);
+        }
     }
 }

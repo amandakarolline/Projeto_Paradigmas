@@ -174,6 +174,7 @@ public class Empresa {
     
     private void adicionarFuncionario(Funcionario funcionario) {
         funcionarios.add(funcionario);
+        adicionarFuncionarioDepartamento(funcionario);
         System.out.println("Funcionário cadastrado com sucesso!");
     }
 
