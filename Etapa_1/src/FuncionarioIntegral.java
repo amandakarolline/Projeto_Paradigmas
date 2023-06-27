@@ -54,11 +54,11 @@ public class FuncionarioIntegral extends Funcionario {
     public void exibirDados() {
         //super.exibirDados();
         System.out.println("\n=====================================================================================================================");
-        System.out.print("Código: " + this.getCodigo() + ",   ");
-        System.out.print("Nome: " + this.getNome()+ ",   ");
-        System.out.print("Departamento: " + this.getDepartamento().getNome() + ",   ");
+        System.out.print("Código: " + this.getCodigo() + "   ");
+        System.out.print("Nome: " + this.getNome()+ "   ");
+        System.out.print("Departamento: " + this.getDepartamento().getNome() + "   ");
         System.out.print("Salário: R$" + salario + ",   ");
-        System.out.print("Carga Horária: " + cargaHoraria + " h" + ",   ");
+        System.out.print("Carga Horária: " + cargaHoraria + " h" + "   ");
         System.out.println("Benefícios: R$" + beneficios);
         System.out.println("=====================================================================================================================");
 

@@ -6,7 +6,7 @@ public abstract class Funcionario implements Dados {
     private int codigo;
     private String nome;
     private Departamento departamento;
-     
+    
     //construtor
     public Funcionario(int codigo, String nome, Departamento departamento) {
         this.codigo = codigo;
@@ -31,7 +31,7 @@ public abstract class Funcionario implements Dados {
         this.nome = nome;
     }
 
-     public Departamento getDepartamento() {
+    public Departamento getDepartamento() {
         return departamento;
     }
 
@@ -39,20 +39,9 @@ public abstract class Funcionario implements Dados {
         this.departamento = departamento;
     }
     
-   
-    //public void exibirDados() {
-
-    //}
-
-    public void exibirDados() {
-        System.out.println("Código: " + codigo);
-        System.out.println("Nome: " + nome);
-        System.out.println("Departamento: " + departamento.getNome());
-    }
 
     public abstract void alterarDados(Scanner scanner);
     
- 
 }
 
 

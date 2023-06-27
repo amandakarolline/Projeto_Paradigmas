@@ -42,10 +42,10 @@ public class FuncionarioTerceirizado extends Funcionario {
     public void exibirDados() {
         //super.exibirDados();
         System.out.println("\n=====================================================================================================================");
-        System.out.print("Código: " + this.getCodigo() + ",   ");
-        System.out.print("Nome: " + this.getNome() + ",   ");
-        System.out.print("Departamento: " + this.getDepartamento().getNome()+ ",   ");
-        System.out.print("Empresa Contratante: " + empresaContratante + ",   ");
+        System.out.print("Código: " + this.getCodigo() + "   ");
+        System.out.print("Nome: " + this.getNome() + "   ");
+        System.out.print("Departamento: " + this.getDepartamento().getNome()+ "   ");
+        System.out.print("Empresa Contratante: " + empresaContratante + "   ");
         System.out.println("Prazo de Contrato: " + prazoContrato + " meses");
         System.out.println("=====================================================================================================================");
     }
@@ -67,7 +67,7 @@ public class FuncionarioTerceirizado extends Funcionario {
         System.out.println("\nNova empresa contratante: ");
         String novaEmpresaContratante = scanner.nextLine();
 
-        System.out.println("Novo prazode contrato (meses):");
+        System.out.println("Novo prazo de contrato (meses):");
         int novoPrazoDeContrato = scanner.nextInt();
 
         // Atualizamos os dados do funcionário

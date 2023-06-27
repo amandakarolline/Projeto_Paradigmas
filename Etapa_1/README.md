@@ -1,18 +1,43 @@
-## Getting Started
+# Projeto Paradigmas de Programação
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+<h2 align='right'> Alunos: </h2>
+<h4 align='right'>
+<ul>
+Amanda Karolline Barbosa Sousa
+<br>Antonio Lucas da Silva Vale </br>
+</ul>
+</h4>
 
-## Folder Structure
+## Cadastro de Funcionários
 
-The workspace contains two folders by default, where:
+Este é um sistema de gerenciamento de funcionários e departamentos de uma empresa fictícia, implementado em Java.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Descrição
+O programa é responsável por gerenciar os funcionários e departamentos da empresa. Ele oferece funcionalidades como cadastrar, alterar, excluir e exibir dados de funcionários, além de consultar informações sobre departamentos.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Funcionalidades
+O sistema oferece as seguintes funcionalidades:
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+1. Cadastrar um novo funcionário:
 
-## Dependency Management
+- O usuário pode cadastrar um novo funcionário fornecendo seu código, nome, departamento e tipo de funcionário.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+2. Alterar dados de um funcionário:
+
+- O usuário pode alterar os dados de um funcionário existente, fornecendo o código do funcionário desejado.
+
+3. Excluir um funcionário:
+
+- O usuário pode excluir um funcionário da empresa, fornecendo o código do funcionário desejado.
+
+4. Exibir dados de um funcionário:
+
+- O usuário pode visualizar os dados de um funcionário, fornecendo o código do funcionário desejado.
+
+5. Consultar funcionários de um departamento:
+
+- O usuário pode obter uma lista de funcionários de um departamento específico.
+
+6. Consultar informações de um departamento:
+
+- O usuário pode obter informações sobre um departamento, como nome e lista de funcionários.

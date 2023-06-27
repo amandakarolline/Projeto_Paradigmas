@@ -1,4 +1,4 @@
 
-public interface Dados {
-    public abstract void exibirDados();
+public abstract interface Dados {
+    public void exibirDados();
 }

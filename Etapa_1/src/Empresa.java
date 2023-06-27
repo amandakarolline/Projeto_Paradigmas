@@ -30,17 +30,17 @@ public class Empresa {
 
 
 
-     public List<Funcionario> getFuncionariosDepartamento(String nome){
+    public List<Funcionario> getFuncionariosDepartamento(String nome){
         Departamento departamento = getDepartamento(nome);
         if (departamento != null){
             return departamento.getFuncionarios();
         }
         return null;
-     }
+    }
 
 
 
-     private Funcionario searchFuncionario(int codigo) {
+    private Funcionario searchFuncionario(int codigo) {
         List<Funcionario> funcionarios = getFuncionarios();
         for (Funcionario funcionario : funcionarios) {
             if (funcionario.getCodigo() == codigo) {
@@ -51,20 +51,20 @@ public class Empresa {
     }
 
 
-     public Departamento getDepartamento(String nome){
+    public Departamento getDepartamento(String nome){
         for (Departamento departamento: departamentos){
             if (departamento.getNome().equals(nome)){
                 return departamento;
             }
         }
         return null;
-     }
+    }
 
 
 
-     public void removeFuncionario(Funcionario funcionario){
+    public void removeFuncionario(Funcionario funcionario){
         
-     }
+    }
 
 
 
@@ -134,7 +134,7 @@ public class Empresa {
 
 
 
-     private void cadastrarFuncionario(Scanner scanner) {
+    private void cadastrarFuncionario(Scanner scanner) {
         System.out.println("\n\n======================= CADASTRO DE FUNCIONÁRIO ========================");
         System.out.println("\n============== TIPOS ==============");
         System.out.println("1. Funcionário Integral");
@@ -152,6 +152,15 @@ public class Empresa {
             System.out.print("Código: "); //Mudar para autoincremento
             int codigo = scanner.nextInt();
             scanner.nextLine(); // Limpar o buffer do teclado
+            Funcionario funcionario = searchFuncionario(codigo);
+            if (funcionario != null) {
+                do {
+                    codigo++;
+                    funcionario = searchFuncionario(codigo);
+                } while (funcionario != null);
+                System.out.println("Código já existe!\n");
+                System.out.printf("Novo código: %d\n", codigo);
+            }
 
             System.out.print("Nome: ");
             String nome = scanner.nextLine();
@@ -207,7 +216,7 @@ public class Empresa {
                     int prazoContrato = scanner.nextInt();
 
                     FuncionarioTerceirizado funcionarioTerceirizado = new FuncionarioTerceirizado(codigo, nome, departamento, empresaContratante, prazoContrato);
-                   departamento.adicionar(funcionarioTerceirizado);
+                    departamento.adicionar(funcionarioTerceirizado);
                     System.out.println("=========================================================================");
                     System.out.println("                  Funcionário cadastrado com sucesso!");
                     System.out.println("=========================================================================\n");
@@ -229,7 +238,7 @@ public class Empresa {
 
 
 
-     public void alterarDadosFuncionario(Scanner scanner) {
+    public void alterarDadosFuncionario(Scanner scanner) {
         System.out.println("\n\n=================== ALTERAÇÃO DE DADOS DO FUNCIONÁRIO ====================\n");
         System.out.print("Código do funcionário que deseja alterar: ");
 
@@ -290,8 +299,6 @@ public class Empresa {
                 System.out.println("=========================================================================");
                 System.out.println("                       Funcionário não encontrado!");
                 System.out.println("=========================================================================\n");
-
-
             }
 
         } catch (InputMismatchException e) {
@@ -301,8 +308,6 @@ public class Empresa {
             scanner.nextLine(); // Limpar o buffer do teclado
         }
     }
-
-
 
 
     private void exibirDadosFuncionario(Scanner scanner) {
@@ -321,10 +326,9 @@ public class Empresa {
                 System.out.println("=========================================================================");
                 System.out.println("                       Funcionário não encontrado!");
                 System.out.println("=========================================================================\n");
-
             }
         } catch (InputMismatchException e) {
-           System.out.println("=========================================================================");
+            System.out.println("=========================================================================");
             System.out.println("               Entrada inválida! Digite um número válido.");
             System.out.println("=========================================================================\n");
             scanner.nextLine(); // Limpar o buffer do teclado
@@ -378,7 +382,7 @@ public class Empresa {
 
     public void exibirDadosDepartamento(Scanner scanner){
 
-          try {
+        try {
             String nomeDepartamento = escolherDepartamento(scanner);
 
             Departamento departamento = getDepartamento(nomeDepartamento);

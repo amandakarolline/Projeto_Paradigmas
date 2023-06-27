@@ -44,10 +44,10 @@ public class FuncionarioMeioPeriodo extends Funcionario {
         // super.exibirDados();
         System.out.println(
                 "\n=====================================================================================================================");
-        System.out.print("Código: " + this.getCodigo() + ",   ");
-        System.out.print("Nome: " + this.getNome() + ",   ");
-        System.out.print("Departamento: " + this.getDepartamento().getNome() + ",   ");
-        System.out.print("Salário: R$" + salario + ",   ");
+        System.out.print("Código: " + this.getCodigo() + "   ");
+        System.out.print("Nome: " + this.getNome() + "   ");
+        System.out.print("Departamento: " + this.getDepartamento().getNome() + "   ");
+        System.out.print("Salário: R$" + salario + "   ");
         System.out.println("Turno de Trabalho: " + turno);
         System.out.println(
                 "=====================================================================================================================");

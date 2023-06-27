@@ -56,10 +56,10 @@ public class Departamento implements Dados {
     public void exibirDados() {
 
         System.out.println(
-                "\n\n============================================= INFORMAÇÕES DO DEPARTAMENTO =============================================");
+                "\n\n============================================ INFORMAÇÕES DO DEPARTAMENTO ============================================");
         System.out.println("Código: " + codigo + "    Nome: " + nome);
         System.out.println(
-                "\n========================================== FUNCIONARIOS DO DEPARTAMENTO ============================================");
+                "\n=========================================== FUNCIONÁRIOS DO DEPARTAMENTO ============================================");
         for (Funcionario funcionario : funcionarios) {
             funcionario.exibirDados();
         }
