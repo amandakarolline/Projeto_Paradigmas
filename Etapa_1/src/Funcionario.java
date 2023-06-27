@@ -44,11 +44,11 @@ public abstract class Funcionario implements Dados {
 
     //}
 
-    /*public void exibirDados() {
+    public void exibirDados() {
         System.out.println("Código: " + codigo);
         System.out.println("Nome: " + nome);
         System.out.println("Departamento: " + departamento.getNome());
-    }*/
+    }
 
     public abstract void alterarDados(Scanner scanner);
     
