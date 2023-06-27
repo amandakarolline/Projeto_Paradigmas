@@ -1,61 +1,72 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.ArrayList;
 
-abstract class Departamento {
+public class Departamento implements Dados {
 
+    // Atributos
+    private int codigo;
     private String nome;
-    private int identificador;
-    private List<Object[]> departamentos;
-    private List<Funcionario> pessoas;
-        
-    public Departamento(){
-        departamentos = new ArrayList<>();
-        pessoas = new ArrayList<>();
+    private List<Funcionario> funcionarios;
+    private Empresa empresa;
 
-        // Definindo departamentos
-        departamentos.add(new Object[]{"Administrativo", 1, new ArrayList<>()});
-        departamentos.add(new Object[]{"Financeiro", 2, new ArrayList<>()});
-        departamentos.add(new Object[]{"RH", 3, new ArrayList<>()});
-        departamentos.add(new Object[]{"Marketing", 4, new ArrayList<>()});
-        departamentos.add(new Object[]{"Servicos Gerais", 5, new ArrayList<>()});
-    }
+    // Construtor
+    public Departamento(String nome, int codigo, Empresa empresa) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.funcionarios = new ArrayList<>();
+        this.empresa = empresa;
 
-    //lista de pessoas por departamentos
-    List<Object> departamentoAdministrativo = (List<Object>) departamentos.get(0)[2];
-    List<Object> departamentoFinanceiro = (List<Object>) departamentos.get(1)[2];
-    List<Object> departamentoRH = (List<Object>) departamentos.get(2)[2];
-    List<Object> departamentoMarketing = (List<Object>) departamentos.get(3)[2];
-    List<Object> departamentoServicosGerais = (List<Object>) departamentos.get(4)[2];
-
-    //atributos
-    private String funcionario;
-     
-    //construtor
-    public Departamento(String funcionario) {
-        this.funcionario = funcionario;
     }
 
     // Métodos getters e setters
-    public int getIdentificacao() {
-        return identificador;
-    }
-
-    public String getFuncionario() {
+    public String getNome() {
         return nome;
     }
 
-
-    // Método para exibir os dados do funcionário
-    public void exibirDados() {
-        Object[] selecionado = departamentos.get(0);
-        System.out.println("Nome: " + selecionado[0]);
-        System.out.println("Identificação: " + selecionado[1]);
-        System.out.println("Funcionarios no departamento: "+ selecionado[2]);
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void adicionarFuncionarioDepartamento(Funcionario funcionario){
-        if (funcionario.departamento == "Administrativo"){
-            (departamentoAdministrativo).add(funcionario.nome);
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void adicionar(Funcionario funcionario) {
+        funcionarios.add(funcionario);
+    }
+
+    public void removeFuncionario(Funcionario funcionario) {
+        funcionarios.remove(funcionario);
+
+    }
+
+    public void exibirDados() {
+
+        System.out.println(
+                "\n\n============================================= INFORMAÇÕES DO DEPARTAMENTO =============================================");
+        System.out.println("Código: " + codigo + "    Nome: " + nome);
+        System.out.println(
+                "\n========================================== FUNCIONARIOS DO DEPARTAMENTO ============================================");
+        for (Funcionario funcionario : funcionarios) {
+            funcionario.exibirDados();
         }
     }
+
+    public void alterarDados(Scanner scanner) {
+
+    }
+
 }

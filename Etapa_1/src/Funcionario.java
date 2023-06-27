@@ -1,20 +1,28 @@
-abstract class Funcionario {
+import java.util.Scanner;
+
+public abstract class Funcionario implements Dados {
 
     //atributos
-    String nome;
-    private int identificacao;
-    private double salario;
-    String departamento;
+    private int codigo;
+    private String nome;
+    private Departamento departamento;
      
     //construtor
-    public Funcionario(String nome, int identificacao, double salario, String departamento) {
+    public Funcionario(int codigo, String nome, Departamento departamento) {
+        this.codigo = codigo;
         this.nome = nome;
-        this.identificacao = identificacao;
-        this.salario = salario;
         this.departamento = departamento;
     }
 
     // Métodos getters e setters
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -23,35 +31,29 @@ abstract class Funcionario {
         this.nome = nome;
     }
 
-    public int getIdentificacao() {
-        return identificacao;
-    }
-
-    public void setIdentificacao(int identificacao) {
-        this.identificacao = identificacao;
-    }
-
-    public double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
-
-    public String getDepartamento() {
+     public Departamento getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+    
+   
+    //public void exibirDados() {
 
-    // Método para exibir os dados do funcionário
-    public void exibirDados() {
+    //}
+
+    /*public void exibirDados() {
+        System.out.println("Código: " + codigo);
         System.out.println("Nome: " + nome);
-        System.out.println("Identificação: " + identificacao);
-        System.out.println("Salário: R$" + salario);
-        System.out.println("Departamento: "+ departamento);
-    }
+        System.out.println("Departamento: " + departamento.getNome());
+    }*/
+
+    public abstract void alterarDados(Scanner scanner);
+    
+ 
 }
+
+
+
