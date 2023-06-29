@@ -2,18 +2,15 @@ import java.util.Scanner;
 
 public class FuncionarioTerceirizado extends Funcionario {
 
-    //Atributos específicos
     private String empresaContratante;
     private int prazoContrato;
 
-    //Construtor
     public FuncionarioTerceirizado(int codigo, String nome, Departamento departamento, String empresaContratante, int prazoContrato) {
         super(codigo, nome, departamento);
         this.empresaContratante = empresaContratante;
         this.prazoContrato = prazoContrato; 
     }
 
-    // Métodos getters e setters específicos
     public String getEmpresaContratante() {
         return empresaContratante;
     }
@@ -30,17 +27,8 @@ public class FuncionarioTerceirizado extends Funcionario {
         this.prazoContrato = prazoContrato;
     }
 
-    // Método para exibir os dados de funcionário terceirizado
-    
-    /*public void exibirDados() {
-        //super.exibirDados();
-        System.out.println("Empresa Contratante: " + empresaContratante);
-        System.out.println("Prazo de Contrato: " + prazoContrato + " meses");
-    }*/
-    
 
     public void exibirDados() {
-        //super.exibirDados();
         System.out.println("\n=====================================================================================================================");
         System.out.print("Código: " + this.getCodigo() + "   ");
         System.out.print("Nome: " + this.getNome() + "   ");
@@ -70,7 +58,6 @@ public class FuncionarioTerceirizado extends Funcionario {
         System.out.println("Novo prazo de contrato (meses):");
         int novoPrazoDeContrato = scanner.nextInt();
 
-        // Atualizamos os dados do funcionário
         this.setNome(novoNome);
         this.setDepartamento(novoDepartamento);
         this.setEmpresaContratante(novaEmpresaContratante);
