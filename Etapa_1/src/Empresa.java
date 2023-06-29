@@ -149,7 +149,7 @@ public class Empresa {
 
 
             System.out.println("\n\n=================== INSERÇÃO DE DADOS DO FUNCIONÁRIO ====================");
-            System.out.print("Código: "); //Mudar para autoincremento
+            System.out.print("Código: "); 
             int codigo = scanner.nextInt();
             scanner.nextLine(); // Limpar o buffer do teclado
             Funcionario funcionario = searchFuncionario(codigo);
