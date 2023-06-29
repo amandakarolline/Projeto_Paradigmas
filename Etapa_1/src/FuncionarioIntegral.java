@@ -14,7 +14,6 @@ public class FuncionarioIntegral extends Funcionario {
         this.beneficios = beneficios;
     }
 
-
     public double getSalario() {
         return salario;
     }
@@ -55,7 +54,7 @@ public class FuncionarioIntegral extends Funcionario {
         
         Empresa empresa = getDepartamento().getEmpresa();
 
-        System.out.print("Novo mome: "); //Faz sentido?
+        System.out.print("Novo mome: ");
         String novoNome = scanner.nextLine();
 
         String nomeDepartamento = Empresa.escolherDepartamento(scanner);
