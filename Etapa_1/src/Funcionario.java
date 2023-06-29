@@ -2,19 +2,17 @@ import java.util.Scanner;
 
 public abstract class Funcionario implements Dados {
 
-    //atributos
     private int codigo;
     private String nome;
     private Departamento departamento;
     
-    //construtor
     public Funcionario(int codigo, String nome, Departamento departamento) {
         this.codigo = codigo;
         this.nome = nome;
         this.departamento = departamento;
     }
 
-    // Métodos getters e setters
+   
     public int getCodigo() {
         return codigo;
     }
@@ -39,9 +37,7 @@ public abstract class Funcionario implements Dados {
         this.departamento = departamento;
     }
     
-
-    public abstract void alterarDados(Scanner scanner);
-    
+    public abstract void alterarDados(Scanner scanner);   
 }
 
 
