@@ -2,11 +2,9 @@ import java.util.Scanner;
 
 public class FuncionarioMeioPeriodo extends Funcionario {
 
-    // Atributos específicos
     private double salario;
     private String turno;
 
-    // Construtor
     public FuncionarioMeioPeriodo(int codigo, String nome, Departamento departamento, double salario, String turno) {
         super(codigo, nome, departamento);
         this.salario = salario;
@@ -14,7 +12,6 @@ public class FuncionarioMeioPeriodo extends Funcionario {
 
     }
 
-    // Métodos getters e setters específicos
     public double getSalario() {
         return salario;
     }
@@ -31,17 +28,7 @@ public class FuncionarioMeioPeriodo extends Funcionario {
         this.turno = turno;
     }
 
-    // Método para exibir os dados de funcionário de meio período
-
-    /*
-     * public void exibirDados() {
-     * //super.exibirDados();
-     * System.out.println("Turno de Trabalho: " + turno);
-     * }
-     */
-
     public void exibirDados() {
-        // super.exibirDados();
         System.out.println(
                 "\n=====================================================================================================================");
         System.out.print("Código: " + this.getCodigo() + "   ");
@@ -51,7 +38,6 @@ public class FuncionarioMeioPeriodo extends Funcionario {
         System.out.println("Turno de Trabalho: " + turno);
         System.out.println(
                 "=====================================================================================================================");
-
     }
 
     @Override
@@ -75,7 +61,6 @@ public class FuncionarioMeioPeriodo extends Funcionario {
         System.out.println("Novo turno de trabalho: ");
         String novoTurno = scanner.nextLine();
 
-        // Atualizamos os dados do funcionário
         this.setNome(novoNome);
         this.setDepartamento(novoDepartamento);
         this.setSalario(novoSalario);
