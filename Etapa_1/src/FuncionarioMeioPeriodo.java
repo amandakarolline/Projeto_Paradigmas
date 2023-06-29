@@ -9,7 +9,6 @@ public class FuncionarioMeioPeriodo extends Funcionario {
         super(codigo, nome, departamento);
         this.salario = salario;
         this.turno = turno;
-
     }
 
     public double getSalario() {
