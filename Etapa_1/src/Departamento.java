@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Departamento implements Dados {
 
-    // Atributos
     private int codigo;
     private String nome;
     private List<Funcionario> funcionarios;
     private Empresa empresa;
 
-    // Construtor
     public Departamento(String nome, int codigo, Empresa empresa) {
         this.codigo = codigo;
         this.nome = nome;
@@ -19,7 +17,6 @@ public class Departamento implements Dados {
 
     }
 
-    // Métodos getters e setters
     public String getNome() {
         return nome;
     }
@@ -68,5 +65,4 @@ public class Departamento implements Dados {
     public void alterarDados(Scanner scanner) {
 
     }
-
 }
