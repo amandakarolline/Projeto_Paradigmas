@@ -57,7 +57,7 @@ public class FuncionarioTerceirizado extends Funcionario {
 
         System.out.println("Novo prazo de contrato (meses):");
         int novoPrazoDeContrato = scanner.nextInt();
-
+        
         this.setNome(novoNome);
         this.setDepartamento(novoDepartamento);
         this.setEmpresaContratante(novaEmpresaContratante);
