@@ -62,39 +62,168 @@ public class EmpresaGUI extends JFrame {
         mainPanel.add(optionsPanel);
         setContentPane(mainPanel);
     }
+    
 
-    private void cadastrarFuncionario() {
-        JTextField codigoField = new JTextField(10);
-        JTextField nomeField = new JTextField(10);
-        String[] tipos = {"Funcionário Integral", "Funcionário Meio Período", "Funcionário Terceirizado"};
-        JComboBox<String> tipoCombo = new JComboBox<>(tipos);
-
+     private void cadastrarFuncionario() {
+        
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        panel.add(new JLabel("Código:"));
-        panel.add(codigoField);
-        panel.add(new JLabel("Nome:"));
-        panel.add(nomeField);
-        panel.add(new JLabel("Tipo de funcionário:"));
-        panel.add(tipoCombo);
 
+        String[] tipos = {"Funcionário Integral", "Funcionário Meio Período", "Funcionário Terceirizado"};
+        JComboBox<String> tipoCombo = new JComboBox<>(tipos);
+        JLabel tipo_funcionario = new JLabel("Tipo Funcionário:");
+        tipo_funcionario.setAlignmentX(CENTER_ALIGNMENT);
+        panel.add(tipo_funcionario);
+        panel.add(tipoCombo);
+        
+      
         int result = JOptionPane.showConfirmDialog(this, panel, "Cadastrar Funcionário",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (result == JOptionPane.OK_OPTION) {
-            try {
-                int codigo = Integer.parseInt(codigoField.getText());
-                String nome = nomeField.getText();
-                String tipo = (String) tipoCombo.getSelectedItem();
-                // Adicionar lógica para cadastrar o funcionário
-                JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Código inválido. Por favor, insira um número inteiro.");
+             panel.remove(tipo_funcionario);
+             panel.remove(tipoCombo);
+
+            JTextField codigoField = new JTextField(20);
+            JLabel codigoLabel = new JLabel("Código:");
+            codigoLabel.setAlignmentX(CENTER_ALIGNMENT);
+            panel.add(codigoLabel);
+            panel.add(codigoField);
+
+            JTextField nomeField = new JTextField(20);
+            JLabel nomeLabel = new JLabel("Nome:");
+            nomeLabel.setAlignmentX(CENTER_ALIGNMENT);
+            panel.add(nomeLabel);
+            panel.add(nomeField);
+     
+            JTextField departamentoField = new JTextField(20);
+            JLabel departamentoLabel = new JLabel("Departamento:");
+            departamentoLabel.setAlignmentX(CENTER_ALIGNMENT);
+            panel.add(departamentoLabel);
+            panel.add(departamentoField);
+
+            JTextField salarioField = new JTextField(20);
+            JTextField cargaHorariaField = new JTextField(20);
+            JTextField beneficiosField = new JTextField(20);
+
+            JTextField turnoField = new JTextField(20);
+
+            JTextField empresaContratanteField = new JTextField(20);
+            JTextField prazoContratoField = new JTextField(20);
+
+
+            String selectedItem = (String) tipoCombo.getSelectedItem();
+
+           
+            if (selectedItem.equals("Funcionário Integral")) {
+
+                JLabel salarioLabel = new JLabel("Salário:");
+                salarioLabel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.add(salarioLabel);
+                panel.add(salarioField);
+
+                JLabel cargaHorariaLabel = new JLabel("Carga Horária:");
+                cargaHorariaLabel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.add(cargaHorariaLabel);
+                panel.add(cargaHorariaField);
+
+                JLabel beneficiosLabel = new JLabel("Benefícios:");
+                beneficiosLabel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.add(beneficiosLabel);
+                panel.add(beneficiosField);
+
+
+            } else if (selectedItem.equals("Funcionário Meio Período")) {
+
+                JLabel salarioLabel = new JLabel("Salário:");
+                salarioLabel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.add(salarioLabel);
+                panel.add(salarioField);
+
+                JLabel turnoLabel = new JLabel("Turno de Trabalho:");
+                turnoLabel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.add(turnoLabel);
+                panel.add(turnoField);
+              
+
+            } else if (selectedItem.equals("Funcionário Terceirizado")) {
+
+                JLabel empresaContratanteLabel = new JLabel("Empresa Contratante:");
+                empresaContratanteLabel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.add(empresaContratanteLabel);
+                panel.add(empresaContratanteField);
+
+                JLabel prazoContratoLabel = new JLabel("Prazo de Contrato:");
+                prazoContratoLabel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.add(prazoContratoLabel);
+                panel.add(prazoContratoField);
+            }
+
+            
+            result = JOptionPane.showConfirmDialog(this, panel, "Cadastro de Funcionário",
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+            if (result == JOptionPane.OK_OPTION) {
+
+                 try {
+                      int codigo = Integer.parseInt(codigoField.getText());
+                      String nome = nomeField.getText();
+                      String departamento = departamentoField.getText(); //tem que mudar, não pode ser colhido como String
+                                                                         
+                    } catch (InputMismatchException e) {
+                        JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                    }
+
+
+                if (selectedItem.equals("Funcionário Integral")) {
+                    try {
+                        double salario = Double.parseDouble(salarioField.getText());
+                        int cargaHoraria = Integer.parseInt(cargaHorariaField.getText());
+                        double beneficios = Double.parseDouble(beneficiosField.getText());
+
+                        // Adicionar lógica para cadastrar o funcionário
+                        JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
+
+                    } catch (InputMismatchException e) {
+                        JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                    }
+               
+
+
+                } else if (selectedItem.equals("Funcionário Meio Período")) {
+                    try {
+                        double salario = Double.parseDouble(salarioField.getText());
+                        String turno = turnoField.getText();
+
+                        // Adicionar lógica para cadastrar o funcionário
+                        JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
+
+                    } catch (InputMismatchException e) {
+                        JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                    }
+
+              
+
+                } else if (selectedItem.equals("Funcionário Terceirizado")) {
+
+                    try {
+                        
+                        String empresaContratante = empresaContratanteField.getText();
+                        int prazoContrato = Integer.parseInt(prazoContratoField.getText());
+
+                        // Adicionar lógica para cadastrar o funcionário
+                        JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
+
+                    } catch (InputMismatchException e) {
+                        JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                    }
+                }
             }
         }
     }
+    
 
     private void alterarDadosFuncionario() {
         // Lógica para alterar os dados do funcionário
