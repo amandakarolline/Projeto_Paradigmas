@@ -244,14 +244,16 @@ public class EmpresaGUI extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        panel.add(new JLabel("Código do funcionário a ser Alterado:"));
+        JLabel codigoLabel = new JLabel("Código do funcionário a ser Alterado:");
+        panel.add(codigoLabel);
         panel.add(codigoField);
 
         int result = JOptionPane.showConfirmDialog(this, panel, "Alterar Funcionário",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (result == JOptionPane.OK_OPTION) {
+            panel.remove(codigoLabel);
+            panel.remove(codigoField);
 
             try {
                 int codigo = Integer.parseInt(codigoField.getText());
@@ -295,13 +297,6 @@ public class EmpresaGUI extends JFrame {
                         panel.add(novosBeneficiosLabel);
                         panel.add(novosBeneficiosField);
 
-                        String novoNome = novoNomeField.getText();
-                        Departamento nomeDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
-                        double novoSalario = Double.parseDouble(novoSalarioField.getText());
-                        int novaCargaHoraria = Integer.parseInt(novaCargaHorariaField.getText());
-                        double novosBeneficios = Double.parseDouble(novosBeneficiosField.getText());
-
-                        ((FuncionarioIntegral) funcionario).alterarDadosFuncionarioIntegral(novoNome, String.valueOf(nomeDepartamento), novoSalario, novaCargaHoraria,  novosBeneficios);
                     } else if (funcionario instanceof FuncionarioMeioPeriodo) {
                         JLabel novoSalarioLabel = new JLabel("Novo Salário:");
                         novoSalarioLabel.setAlignmentX(CENTER_ALIGNMENT);
@@ -313,29 +308,50 @@ public class EmpresaGUI extends JFrame {
                         panel.add(turnoLabel);
                         panel.add(novoTurnoField);
 
-                       String novoNome = novoNomeField.getText();
-                       Departamento nomeDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
-                       double novoSalario = Double.parseDouble(novoSalarioField.getText());
-                       String novoTurno = novoTurnoField.getText();
-
-                        ((FuncionarioMeioPeriodo) funcionario).alterarDadosMeioPeriodo(novoNome, String.valueOf(nomeDepartamento), novoSalario,  novoTurno);
                     } else {
                         JLabel empresaContratanteLabel = new JLabel("Empresa Contratante:");
                         empresaContratanteLabel.setAlignmentX(CENTER_ALIGNMENT);
                         panel.add(empresaContratanteLabel);
                         panel.add(novaEmpresaContratanteField);
+
                         JLabel prazoContratoLabel = new JLabel("Prazo de Contrato:");
                         prazoContratoLabel.setAlignmentX(CENTER_ALIGNMENT);
                         panel.add(prazoContratoLabel);
                         panel.add(novoPrazoContratoField);
-
-                        String novoNome = novoNomeField.getText();
-                        Departamento novoDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
-                        String novaEmpresaContratante = novaEmpresaContratanteField.getText();
-                        int novoPrazoContrato = Integer.parseInt(novoPrazoContratoField.getText());
-
-                        ((FuncionarioTerceirizado) funcionario).alterarDadosTerceirizados(novoNome, String.valueOf(novoDepartamento), novaEmpresaContratante, novoPrazoContrato);
                     }
+
+                    result = JOptionPane.showConfirmDialog(this, panel, "Alterar Funcionário",
+                            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+                    if (result == JOptionPane.OK_OPTION) {
+                        if (funcionario instanceof FuncionarioIntegral) {
+
+                            String novoNome = novoNomeField.getText();
+                            Departamento novoDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
+                            double novoSalario = Double.parseDouble(novoSalarioField.getText());
+                            int novaCargaHoraria = Integer.parseInt(novaCargaHorariaField.getText());
+                            double novosBeneficios = Double.parseDouble(novosBeneficiosField.getText());
+
+                            ((FuncionarioIntegral) funcionario).alterarDadosFuncionarioIntegral(novoNome, novoDepartamento, novoSalario, novaCargaHoraria,  novosBeneficios);
+                        } else if (funcionario instanceof FuncionarioMeioPeriodo) {
+
+                            String novoNome = novoNomeField.getText();
+                            Departamento novoDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
+                            double novoSalario = Double.parseDouble(novoSalarioField.getText());
+                            String novoTurno = novoTurnoField.getText();
+
+                            ((FuncionarioMeioPeriodo) funcionario).alterarDadosMeioPeriodo(novoNome, novoDepartamento, novoSalario,  novoTurno);
+                        } else {
+
+                            String novoNome = novoNomeField.getText();
+                            Departamento novoDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
+                            String novaEmpresaContratante = novaEmpresaContratanteField.getText();
+                            int novoPrazoContrato = Integer.parseInt(novoPrazoContratoField.getText());
+
+                            ((FuncionarioTerceirizado) funcionario).alterarDadosTerceirizados(novoNome, novoDepartamento, novaEmpresaContratante, novoPrazoContrato);
+                        }
+                    }
+
                     JOptionPane.showMessageDialog(this, "Funcionário alterado com sucesso!");
                 } else {
                     JOptionPane.showMessageDialog(this, "Funcionário não encontrado!");
@@ -370,7 +386,7 @@ public class EmpresaGUI extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Funcionário não encontrado!");
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 JOptionPane.showMessageDialog(this, "Código inválido. Por favor, insira um número inteiro.");
             }
         }
