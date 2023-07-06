@@ -1,15 +1,13 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.InputMismatchException;
 import javax.swing.*;
 
 public class EmpresaGUI extends JFrame {
-
+    Empresa empresa = new Empresa();
     public EmpresaGUI() {
-        Empresa empresa = new Empresa();
         setTitle("Sistema de Gerenciamento de Funcionários");
-        setSize(400, 300);
+        setSize(450, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -98,11 +96,12 @@ public class EmpresaGUI extends JFrame {
             panel.add(nomeLabel);
             panel.add(nomeField);
      
-            JTextField departamentoField = new JTextField(20);
+            String[] departamentos = {"Vendas", "Recursos Humanos", "Financeiro", "Tecnologia da Informação", "Serviços Gerais"};
+            JComboBox<String> departamentoCombo = new JComboBox<>(departamentos);
             JLabel departamentoLabel = new JLabel("Departamento:");
             departamentoLabel.setAlignmentX(CENTER_ALIGNMENT);
             panel.add(departamentoLabel);
-            panel.add(departamentoField);
+            panel.add(departamentoCombo);
 
             JTextField salarioField = new JTextField(20);
             JTextField cargaHorariaField = new JTextField(20);
@@ -116,49 +115,51 @@ public class EmpresaGUI extends JFrame {
 
             String selectedItem = (String) tipoCombo.getSelectedItem();
 
-           
-            if (selectedItem.equals("Funcionário Integral")) {
 
-                JLabel salarioLabel = new JLabel("Salário:");
-                salarioLabel.setAlignmentX(CENTER_ALIGNMENT);
-                panel.add(salarioLabel);
-                panel.add(salarioField);
+            switch (selectedItem) {
+                case "Funcionário Integral" -> {
 
-                JLabel cargaHorariaLabel = new JLabel("Carga Horária:");
-                cargaHorariaLabel.setAlignmentX(CENTER_ALIGNMENT);
-                panel.add(cargaHorariaLabel);
-                panel.add(cargaHorariaField);
+                    JLabel salarioLabel = new JLabel("Salário:");
+                    salarioLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(salarioLabel);
+                    panel.add(salarioField);
 
-                JLabel beneficiosLabel = new JLabel("Benefícios:");
-                beneficiosLabel.setAlignmentX(CENTER_ALIGNMENT);
-                panel.add(beneficiosLabel);
-                panel.add(beneficiosField);
+                    JLabel cargaHorariaLabel = new JLabel("Carga Horária:");
+                    cargaHorariaLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(cargaHorariaLabel);
+                    panel.add(cargaHorariaField);
+
+                    JLabel beneficiosLabel = new JLabel("Benefícios:");
+                    beneficiosLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(beneficiosLabel);
+                    panel.add(beneficiosField);
 
 
-            } else if (selectedItem.equals("Funcionário Meio Período")) {
+                }
+                case "Funcionário Meio Período" -> {
 
-                JLabel salarioLabel = new JLabel("Salário:");
-                salarioLabel.setAlignmentX(CENTER_ALIGNMENT);
-                panel.add(salarioLabel);
-                panel.add(salarioField);
+                    JLabel salarioLabel = new JLabel("Salário:");
+                    salarioLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(salarioLabel);
+                    panel.add(salarioField);
 
-                JLabel turnoLabel = new JLabel("Turno de Trabalho:");
-                turnoLabel.setAlignmentX(CENTER_ALIGNMENT);
-                panel.add(turnoLabel);
-                panel.add(turnoField);
-              
+                    JLabel turnoLabel = new JLabel("Turno de Trabalho:");
+                    turnoLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(turnoLabel);
+                    panel.add(turnoField);
 
-            } else if (selectedItem.equals("Funcionário Terceirizado")) {
 
-                JLabel empresaContratanteLabel = new JLabel("Empresa Contratante:");
-                empresaContratanteLabel.setAlignmentX(CENTER_ALIGNMENT);
-                panel.add(empresaContratanteLabel);
-                panel.add(empresaContratanteField);
-
-                JLabel prazoContratoLabel = new JLabel("Prazo de Contrato:");
-                prazoContratoLabel.setAlignmentX(CENTER_ALIGNMENT);
-                panel.add(prazoContratoLabel);
-                panel.add(prazoContratoField);
+                }
+                case "Funcionário Terceirizado" -> {
+                    JLabel empresaContratanteLabel = new JLabel("Empresa Contratante:");
+                    empresaContratanteLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(empresaContratanteLabel);
+                    panel.add(empresaContratanteField);
+                    JLabel prazoContratoLabel = new JLabel("Prazo de Contrato:");
+                    prazoContratoLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(prazoContratoLabel);
+                    panel.add(prazoContratoField);
+                }
             }
 
             
@@ -167,57 +168,55 @@ public class EmpresaGUI extends JFrame {
 
             if (result == JOptionPane.OK_OPTION) {
 
-                 try {
-                      int codigo = Integer.parseInt(codigoField.getText());
-                      String nome = nomeField.getText();
-                      String departamento = departamentoField.getText(); //tem que mudar, não pode ser colhido como String
-                                                                         
-                    } catch (InputMismatchException e) {
-                        JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                switch (selectedItem) {
+                    case "Funcionário Integral" -> {
+                        try {
+                            int codigo = Integer.parseInt(codigoField.getText());
+                            String nome = nomeField.getText();
+                            Departamento departamento = empresa.getDepartamento( (String) departamentoCombo.getSelectedItem());
+                            double salario = Double.parseDouble(salarioField.getText());
+                            int cargaHoraria = Integer.parseInt(cargaHorariaField.getText());
+                            double beneficios = Double.parseDouble(beneficiosField.getText());
+
+                            FuncionarioIntegral funcionarioIntegral = new FuncionarioIntegral(codigo, nome, departamento, salario, cargaHoraria, beneficios);
+                            departamento.adicionar(funcionarioIntegral);
+                            JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
+
+                        } catch (InputMismatchException e) {
+                            JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                        }
                     }
+                    case "Funcionário Meio Período" -> {
+                        try {
+                            int codigo = Integer.parseInt(codigoField.getText());
+                            String nome = nomeField.getText();
+                            Departamento departamento = empresa.getDepartamento( (String) departamentoCombo.getSelectedItem());
+                            double salario = Double.parseDouble(salarioField.getText());
+                            String turno = turnoField.getText();
 
+                            FuncionarioMeioPeriodo funcionarioMeioPeriodo = new FuncionarioMeioPeriodo(codigo, nome, departamento, salario, turno);
+                            departamento.adicionar(funcionarioMeioPeriodo);
+                            JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
 
-                if (selectedItem.equals("Funcionário Integral")) {
-                    try {
-                        double salario = Double.parseDouble(salarioField.getText());
-                        int cargaHoraria = Integer.parseInt(cargaHorariaField.getText());
-                        double beneficios = Double.parseDouble(beneficiosField.getText());
-
-                        // Adicionar lógica para cadastrar o funcionário
-                        JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
-
-                    } catch (InputMismatchException e) {
-                        JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                        } catch (InputMismatchException e) {
+                            JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                        }
                     }
-               
+                    case "Funcionário Terceirizado" -> {
+                        try {
+                            int codigo = Integer.parseInt(codigoField.getText());
+                            String nome = nomeField.getText();
+                            Departamento departamento = empresa.getDepartamento( (String) departamentoCombo.getSelectedItem());
+                            String empresaContratante = empresaContratanteField.getText();
+                            int prazoContrato = Integer.parseInt(prazoContratoField.getText());
 
+                            FuncionarioTerceirizado funcionarioTerceirizado = new FuncionarioTerceirizado(codigo, nome, departamento, empresaContratante, prazoContrato);
+                            departamento.adicionar(funcionarioTerceirizado);
+                            JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
 
-                } else if (selectedItem.equals("Funcionário Meio Período")) {
-                    try {
-                        double salario = Double.parseDouble(salarioField.getText());
-                        String turno = turnoField.getText();
-
-                        // Adicionar lógica para cadastrar o funcionário
-                        JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
-
-                    } catch (InputMismatchException e) {
-                        JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
-                    }
-
-              
-
-                } else if (selectedItem.equals("Funcionário Terceirizado")) {
-
-                    try {
-                        
-                        String empresaContratante = empresaContratanteField.getText();
-                        int prazoContrato = Integer.parseInt(prazoContratoField.getText());
-
-                        // Adicionar lógica para cadastrar o funcionário
-                        JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
-
-                    } catch (InputMismatchException e) {
-                        JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                        } catch (InputMismatchException e) {
+                            JOptionPane.showMessageDialog(this, "Por favor, dê informações válidas!");
+                        }
                     }
                 }
             }
