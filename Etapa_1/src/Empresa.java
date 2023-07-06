@@ -40,7 +40,7 @@ public class Empresa {
 
 
 
-    private Funcionario searchFuncionario(int codigo) {
+    public Funcionario searchFuncionario(int codigo) {
         List<Funcionario> funcionarios = getFuncionarios();
         for (Funcionario funcionario : funcionarios) {
             if (funcionario.getCodigo() == codigo) {

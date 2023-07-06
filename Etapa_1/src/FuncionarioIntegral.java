@@ -80,4 +80,19 @@ public class FuncionarioIntegral extends Funcionario {
         this.setCargaHoraria(novaCargaHoraria);
         this.setBeneficios(novosBeneficios);
     }
+
+    public void alterarDadosFuncionarioIntegral(String novoNome, String nomeDepartamento, Double novoSalario, int novaCargaHoraria,  Double novosBeneficios) {
+
+        Empresa empresa = getDepartamento().getEmpresa();
+        Departamento novoDepartamento = empresa.getDepartamento(nomeDepartamento);
+
+        this.getDepartamento().removeFuncionario(this);
+        novoDepartamento.adicionar(this);
+
+        this.setNome(novoNome);
+        this.setDepartamento(novoDepartamento);
+        this.setSalario(novoSalario);
+        this.setCargaHoraria(novaCargaHoraria);
+        this.setBeneficios(novosBeneficios);
+    }
 }

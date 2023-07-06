@@ -63,4 +63,17 @@ public class FuncionarioTerceirizado extends Funcionario {
         this.setEmpresaContratante(novaEmpresaContratante);
         this.setPrazoContrato(novoPrazoDeContrato);
     }
+    public void alterarDadosTerceirizados(String novoNome, String nomeDepartamento, String novaEmpresaContratante, int novoPrazoDeContrato){
+
+        Empresa empresa = getDepartamento().getEmpresa();
+        Departamento novoDepartamento = empresa.getDepartamento(nomeDepartamento);
+
+        this.getDepartamento().removeFuncionario(this);
+        novoDepartamento.adicionar(this);
+
+        this.setNome(novoNome);
+        this.setDepartamento(novoDepartamento);
+        this.setEmpresaContratante(novaEmpresaContratante);
+        this.setPrazoContrato(novoPrazoDeContrato);
+    }
 }

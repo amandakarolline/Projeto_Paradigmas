@@ -1,9 +1,20 @@
-import java.util.List;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import javax.swing.*;
 
 public class EmpresaGUI extends JFrame {
+
+    int verificarCodigo(int codigo){
+        Funcionario funcionario = empresa.searchFuncionario(codigo);
+        if (funcionario != null) {
+            do {
+                codigo++;
+                funcionario = empresa.searchFuncionario(codigo);
+            } while (funcionario != null);
+            JOptionPane.showMessageDialog(this, "Código já existe!\n Novo código: " + codigo);
+            return codigo;
+        }
+        return codigo;
+    }
     Empresa empresa = new Empresa();
     public EmpresaGUI() {
         setTitle("Sistema de Gerenciamento de Funcionários");
@@ -178,6 +189,7 @@ public class EmpresaGUI extends JFrame {
                             int cargaHoraria = Integer.parseInt(cargaHorariaField.getText());
                             double beneficios = Double.parseDouble(beneficiosField.getText());
 
+                            codigo = verificarCodigo(codigo);
                             FuncionarioIntegral funcionarioIntegral = new FuncionarioIntegral(codigo, nome, departamento, salario, cargaHoraria, beneficios);
                             departamento.adicionar(funcionarioIntegral);
                             JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
@@ -194,6 +206,7 @@ public class EmpresaGUI extends JFrame {
                             double salario = Double.parseDouble(salarioField.getText());
                             String turno = turnoField.getText();
 
+                            codigo = verificarCodigo(codigo);
                             FuncionarioMeioPeriodo funcionarioMeioPeriodo = new FuncionarioMeioPeriodo(codigo, nome, departamento, salario, turno);
                             departamento.adicionar(funcionarioMeioPeriodo);
                             JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
@@ -210,6 +223,7 @@ public class EmpresaGUI extends JFrame {
                             String empresaContratante = empresaContratanteField.getText();
                             int prazoContrato = Integer.parseInt(prazoContratoField.getText());
 
+                            codigo = verificarCodigo(codigo);
                             FuncionarioTerceirizado funcionarioTerceirizado = new FuncionarioTerceirizado(codigo, nome, departamento, empresaContratante, prazoContrato);
                             departamento.adicionar(funcionarioTerceirizado);
                             JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
@@ -225,8 +239,111 @@ public class EmpresaGUI extends JFrame {
     
 
     private void alterarDadosFuncionario() {
-        // Lógica para alterar os dados do funcionário
-        JOptionPane.showMessageDialog(this, "Funcionário alterado com sucesso!");
+        JTextField codigoField = new JTextField(10);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        panel.add(new JLabel("Código do funcionário a ser Alterado:"));
+        panel.add(codigoField);
+
+        int result = JOptionPane.showConfirmDialog(this, panel, "Alterar Funcionário",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+
+            try {
+                int codigo = Integer.parseInt(codigoField.getText());
+                Funcionario funcionario = empresa.searchFuncionario(codigo);
+                if (funcionario != null) {
+                    JTextField novoNomeField = new JTextField(20);
+                    JLabel novoNomeLabel = new JLabel("Novo nome:");
+                    novoNomeLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(novoNomeLabel);
+                    panel.add(novoNomeField);
+
+                    String[] departamentos = {"Vendas", "Recursos Humanos", "Financeiro", "Tecnologia da Informação", "Serviços Gerais"};
+                    JComboBox<String> novoDepartamentoCombo = new JComboBox<>(departamentos);
+                    JLabel novoDepartamentoLabel = new JLabel("Novo departamento:");
+                    novoDepartamentoLabel.setAlignmentX(CENTER_ALIGNMENT);
+                    panel.add(novoDepartamentoLabel);
+                    panel.add(novoDepartamentoCombo);
+
+                    JTextField novoSalarioField = new JTextField(20);
+                    JTextField novaCargaHorariaField = new JTextField(20);
+                    JTextField novosBeneficiosField = new JTextField(20);
+
+                    JTextField novoTurnoField = new JTextField(20);
+
+                    JTextField novaEmpresaContratanteField = new JTextField(20);
+                    JTextField novoPrazoContratoField = new JTextField(20);
+
+                    if (funcionario instanceof FuncionarioIntegral) {
+                        JLabel novoSalarioLabel = new JLabel("Novo Salário:");
+                        novoSalarioLabel.setAlignmentX(CENTER_ALIGNMENT);
+                        panel.add(novoSalarioLabel);
+                        panel.add(novoSalarioField);
+
+                        JLabel novaCargaHorariaLabel = new JLabel("Nova Carga Horária:");
+                        novaCargaHorariaLabel.setAlignmentX(CENTER_ALIGNMENT);
+                        panel.add(novaCargaHorariaLabel);
+                        panel.add(novaCargaHorariaField);
+
+                        JLabel novosBeneficiosLabel = new JLabel("Novos Benefícios:");
+                        novosBeneficiosLabel.setAlignmentX(CENTER_ALIGNMENT);
+                        panel.add(novosBeneficiosLabel);
+                        panel.add(novosBeneficiosField);
+
+                        String novoNome = novoNomeField.getText();
+                        Departamento nomeDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
+                        double novoSalario = Double.parseDouble(novoSalarioField.getText());
+                        int novaCargaHoraria = Integer.parseInt(novaCargaHorariaField.getText());
+                        double novosBeneficios = Double.parseDouble(novosBeneficiosField.getText());
+
+                        ((FuncionarioIntegral) funcionario).alterarDadosFuncionarioIntegral(novoNome, String.valueOf(nomeDepartamento), novoSalario, novaCargaHoraria,  novosBeneficios);
+                    } else if (funcionario instanceof FuncionarioMeioPeriodo) {
+                        JLabel novoSalarioLabel = new JLabel("Novo Salário:");
+                        novoSalarioLabel.setAlignmentX(CENTER_ALIGNMENT);
+                        panel.add(novoSalarioLabel);
+                        panel.add(novoSalarioField);
+
+                        JLabel turnoLabel = new JLabel("Novo Turno de Trabalho:");
+                        turnoLabel.setAlignmentX(CENTER_ALIGNMENT);
+                        panel.add(turnoLabel);
+                        panel.add(novoTurnoField);
+
+                       String novoNome = novoNomeField.getText();
+                       Departamento nomeDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
+                       double novoSalario = Double.parseDouble(novoSalarioField.getText());
+                       String novoTurno = novoTurnoField.getText();
+
+                        ((FuncionarioMeioPeriodo) funcionario).alterarDadosMeioPeriodo(novoNome, String.valueOf(nomeDepartamento), novoSalario,  novoTurno);
+                    } else {
+                        JLabel empresaContratanteLabel = new JLabel("Empresa Contratante:");
+                        empresaContratanteLabel.setAlignmentX(CENTER_ALIGNMENT);
+                        panel.add(empresaContratanteLabel);
+                        panel.add(novaEmpresaContratanteField);
+                        JLabel prazoContratoLabel = new JLabel("Prazo de Contrato:");
+                        prazoContratoLabel.setAlignmentX(CENTER_ALIGNMENT);
+                        panel.add(prazoContratoLabel);
+                        panel.add(novoPrazoContratoField);
+
+                        String novoNome = novoNomeField.getText();
+                        Departamento novoDepartamento = empresa.getDepartamento( (String) novoDepartamentoCombo.getSelectedItem());
+                        String novaEmpresaContratante = novaEmpresaContratanteField.getText();
+                        int novoPrazoContrato = Integer.parseInt(novoPrazoContratoField.getText());
+
+                        ((FuncionarioTerceirizado) funcionario).alterarDadosTerceirizados(novoNome, String.valueOf(novoDepartamento), novaEmpresaContratante, novoPrazoContrato);
+                    }
+                    JOptionPane.showMessageDialog(this, "Funcionário alterado com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Funcionário não encontrado!");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Código inválido. Por favor, insira um número inteiro.");
+            }
+        }
     }
 
     private void excluirFuncionario() {
@@ -245,8 +362,14 @@ public class EmpresaGUI extends JFrame {
         if (result == JOptionPane.OK_OPTION) {
             try {
                 int codigo = Integer.parseInt(codigoField.getText());
-                // Adicionar lógica para excluir o funcionário
-                JOptionPane.showMessageDialog(this, "Funcionário excluído com sucesso!");
+                Funcionario funcionario = empresa.searchFuncionario(codigo);
+                if (funcionario != null) {
+                    Departamento departamento = funcionario.getDepartamento();
+                    departamento.removeFuncionario(funcionario);
+                    JOptionPane.showMessageDialog(this, "Funcionário excluído com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Funcionário não encontrado!");
+                }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Código inválido. Por favor, insira um número inteiro.");
             }

@@ -66,4 +66,17 @@ public class FuncionarioMeioPeriodo extends Funcionario {
         this.setTurno(novoTurno);
     }
 
+    public void alterarDadosMeioPeriodo(String novoNome, String nomeDepartamento, Double novoSalario,  String novoTurno) {
+
+        Empresa empresa = getDepartamento().getEmpresa();
+        Departamento novoDepartamento = empresa.getDepartamento(nomeDepartamento);
+
+        this.getDepartamento().removeFuncionario(this);
+        novoDepartamento.adicionar(this);
+
+        this.setNome(novoNome);
+        this.setDepartamento(novoDepartamento);
+        this.setSalario(novoSalario);
+        this.setTurno(novoTurno);
+    }
 }

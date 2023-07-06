@@ -40,5 +40,3 @@ public abstract class Funcionario implements Dados {
     public abstract void alterarDados(Scanner scanner);   
 }
 
-
-
