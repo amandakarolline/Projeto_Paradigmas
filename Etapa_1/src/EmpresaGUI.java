@@ -364,12 +364,13 @@ public class EmpresaGUI extends JFrame {
 
     private void excluirFuncionario() {
         JTextField codigoField = new JTextField(10);
+        JLabel codigoLabel = new JLabel("Código do funcionário a ser excluído:");
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        panel.add(new JLabel("Código do funcionário a ser excluído:"));
+        panel.add(codigoLabel);
         panel.add(codigoField);
 
         int result = JOptionPane.showConfirmDialog(this, panel, "Excluir Funcionário",
@@ -394,22 +395,86 @@ public class EmpresaGUI extends JFrame {
 
     private void exibirDadosFuncionario() {
         JTextField codigoField = new JTextField(10);
+        JLabel codigoLabel = new JLabel("Código do funcionário a ser exibido:");
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        panel.add(new JLabel("Código do funcionário a ser exibido:"));
+        panel.add(codigoLabel);
         panel.add(codigoField);
 
         int result = JOptionPane.showConfirmDialog(this, panel, "Exibir Dados do Funcionário",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (result == JOptionPane.OK_OPTION) {
+            panel.remove(codigoLabel);
+            panel.remove(codigoField);
+
             try {
                 int codigo = Integer.parseInt(codigoField.getText());
-                // Adicionar lógica para exibir os dados do funcionário
-                JOptionPane.showMessageDialog(this, "Dados do funcionário exibidos com sucesso!");
+                Funcionario funcionario = empresa.searchFuncionario(codigo);
+
+                if (funcionario != null) {
+                    JLabel codigoExibir = new JLabel("Código: " + funcionario.getCodigo());
+                    codigoExibir.setAlignmentX(CENTER_ALIGNMENT);
+                    JLabel nomeExibir = new JLabel("Nome: " + funcionario.getNome());
+                    nomeExibir.setAlignmentX(CENTER_ALIGNMENT);
+                    JLabel departamentoExibir = new JLabel("Departamento: " + funcionario.getDepartamento().getNome());
+                    departamentoExibir.setAlignmentX(CENTER_ALIGNMENT);
+
+                    if (funcionario instanceof FuncionarioIntegral) {
+                        FuncionarioIntegral funcionarioIntegral = (FuncionarioIntegral) funcionario;
+
+                        JLabel salarioExibir = new JLabel("Salário: R$ " + funcionarioIntegral.getSalario());
+                        salarioExibir.setAlignmentX(CENTER_ALIGNMENT);
+                        JLabel cargaHorariaExibir = new JLabel("Carga Horária: " + funcionarioIntegral.getCargaHoraria());
+                        cargaHorariaExibir.setAlignmentX(CENTER_ALIGNMENT);
+                        JLabel beneficiosExibir = new JLabel("Benefícios: R$" + funcionarioIntegral.getBeneficios());
+                        beneficiosExibir.setAlignmentX(CENTER_ALIGNMENT);
+
+                        panel.add(codigoExibir);
+                        panel.add(nomeExibir);
+                        panel.add(departamentoExibir);
+                        panel.add(salarioExibir);
+                        panel.add(cargaHorariaExibir);
+                        panel.add(beneficiosExibir);
+
+                    } else if (funcionario instanceof FuncionarioMeioPeriodo) {
+                        FuncionarioMeioPeriodo funcionarioMeioPeriodo = (FuncionarioMeioPeriodo) funcionario;
+
+                        JLabel salarioExibir = new JLabel("Salário: R$ " + funcionarioMeioPeriodo.getSalario());
+                        salarioExibir.setAlignmentX(CENTER_ALIGNMENT);
+                        JLabel turnoExibir = new JLabel("Turno: " + funcionarioMeioPeriodo.getTurno());
+                        turnoExibir.setAlignmentX(CENTER_ALIGNMENT);
+
+                        panel.add(codigoExibir);
+                        panel.add(nomeExibir);
+                        panel.add(departamentoExibir);
+                        panel.add(salarioExibir);
+                        panel.add(turnoExibir);
+
+                    } else if (funcionario instanceof FuncionarioTerceirizado) {
+                        FuncionarioTerceirizado funcionarioTerceirizado = (FuncionarioTerceirizado) funcionario;
+
+                        JLabel empresaContratanteExibir = new JLabel("Empresa Contratante: " + funcionarioTerceirizado.getEmpresaContratante());
+                        empresaContratanteExibir.setAlignmentX(CENTER_ALIGNMENT);
+                        JLabel prazoContratoExibir = new JLabel("Prazo de Contrato: " + funcionarioTerceirizado.getPrazoContrato());
+                        prazoContratoExibir.setAlignmentX(CENTER_ALIGNMENT);
+
+                        panel.add(codigoExibir);
+                        panel.add(nomeExibir);
+                        panel.add(departamentoExibir);
+                        panel.add(empresaContratanteExibir);
+                        panel.add(prazoContratoExibir);
+                    }
+
+                    JOptionPane.showConfirmDialog(this, panel, "Alterar Funcionário",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Funcionário não encontrado!");
+                }
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Código inválido. Por favor, insira um número inteiro.");
             }
