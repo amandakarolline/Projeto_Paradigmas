@@ -5,9 +5,7 @@ import java.util.InputMismatchException;
 
 public class Empresa {
 
-
     private List<Departamento> departamentos;
-
 
     public Empresa() {
         departamentos = new ArrayList<>();
@@ -18,8 +16,6 @@ public class Empresa {
         departamentos.add(new Departamento("Serviços Gerais", 5, this));
     }
 
-
-
     public List<Funcionario> getFuncionarios(){
         List<Funcionario> funcionarios = new ArrayList<>();
         for(Departamento departamento : departamentos){
@@ -28,8 +24,6 @@ public class Empresa {
         return funcionarios;
     }
 
-
-
     public List<Funcionario> getFuncionariosDepartamento(String nome){
         Departamento departamento = getDepartamento(nome);
         if (departamento != null){
@@ -37,8 +31,6 @@ public class Empresa {
         }
         return null;
     }
-
-
 
     public Funcionario searchFuncionario(int codigo) {
         List<Funcionario> funcionarios = getFuncionarios();
@@ -50,7 +42,6 @@ public class Empresa {
         return null;
     }
 
-
     public Departamento getDepartamento(String nome){
         for (Departamento departamento: departamentos){
             if (departamento.getNome().equals(nome)){
@@ -60,13 +51,9 @@ public class Empresa {
         return null;
     }
 
-
-
     public void removeFuncionario(Funcionario funcionario){
         
     }
-
-
 
     public void exibirMenu() {
         System.out.println("\n============== MENU ==============");
@@ -79,8 +66,6 @@ public class Empresa {
         System.out.println("==================================");
         System.out.print("Digite a opção desejada: ");
     }
-
-
 
     public void executar() {
         Scanner scanner = new Scanner(System.in);
@@ -131,8 +116,6 @@ public class Empresa {
 
         scanner.close();
     }
-
-
 
     private void cadastrarFuncionario(Scanner scanner) {
         System.out.println("\n\n======================= CADASTRO DE FUNCIONÁRIO ========================");
@@ -236,8 +219,6 @@ public class Empresa {
         }
     }
 
-
-
     public void alterarDadosFuncionario(Scanner scanner) {
         System.out.println("\n\n=================== ALTERAÇÃO DE DADOS DO FUNCIONÁRIO ====================\n");
         System.out.print("Código do funcionário que deseja alterar: ");
@@ -270,9 +251,6 @@ public class Empresa {
             scanner.nextLine(); // Limpar o buffer do teclado
         }
     }
-
-
-
 
     private void excluirFuncionario(Scanner scanner) {
         System.out.println("\n\n======================= EXCLUSÃO DE FUNCIONÁRIO ==========================\n");
@@ -334,9 +312,6 @@ public class Empresa {
             scanner.nextLine(); // Limpar o buffer do teclado
         }
     }
-
-
-    
 
     public static String escolherDepartamento(Scanner scanner) {
         System.out.println("\n======= DEPARTAMENTOS =======");
