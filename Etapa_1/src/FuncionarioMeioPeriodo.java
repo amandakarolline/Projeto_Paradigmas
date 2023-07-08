@@ -76,4 +76,15 @@ public class FuncionarioMeioPeriodo extends Funcionario {
         this.setSalario(novoSalario);
         this.setTurno(novoTurno);
     }
+
+    @Override
+    public String retornaStringFuncionario(){
+
+        return ("<html>Código: " + this.getCodigo()+ "<br>" +
+                "Nome: " + this.getNome() +  "<br>" +
+                "Departamento: " + this.getDepartamento().getNome() +  "<br>" +
+                "Salário: R$" + salario +  "<br>" +
+                "Turno de Trabalho: " + turno + "</html>"
+                );             
+    }
 }
