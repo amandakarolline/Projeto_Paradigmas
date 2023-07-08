@@ -83,7 +83,6 @@ public class FuncionarioIntegral extends Funcionario {
 
     public void alterarDadosFuncionarioIntegral(String novoNome, Departamento novoDepartamento, Double novoSalario, int novaCargaHoraria,  Double novosBeneficios) {
 
-
         this.getDepartamento().removeFuncionario(this);
         novoDepartamento.adicionar(this);
 
@@ -93,4 +92,19 @@ public class FuncionarioIntegral extends Funcionario {
         this.setCargaHoraria(novaCargaHoraria);
         this.setBeneficios(novosBeneficios);
     }
+
+    @Override
+    public String retornaStringFuncionario(){
+
+        return ("<html> Código: " + this.getCodigo()+ "<br>" + 
+                "Nome: " + this.getNome() + "<br>" + 
+                "Departamento: " + this.getDepartamento().getNome() + "<br>" +
+                "Salário: R$" + salario + "<br>" +
+                "Carga Horária: " + cargaHoraria + " h" + "<br>" +
+                "Benefícios: R$" + beneficios + "</html>"
+                );        
+    }
 }
+
+
+
